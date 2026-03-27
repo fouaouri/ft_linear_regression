@@ -15,7 +15,7 @@ def trainingData(dataFrame):
     min_km = kms.min()
     max_km = kms.max()
     kms_norm = (kms - min_km) / (max_km - min_km)
-
+    print("normal : ", kms_norm)
     for _ in range(iterations):
         predicted = theta0 + theta1 * kms_norm
         error = predicted - prices
