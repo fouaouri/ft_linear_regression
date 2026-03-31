@@ -10,28 +10,18 @@ def plot_regression_line(kms, prices):
     predicted_norm = theta0 + theta1 * kms_norm
     predicted = predicted_norm * (max_price - min_price) + min_price
 
-    mse = ((predicted - prices) ** 2).mean()
-    print(f"Mean Squared Error: {mse}")
-
     min_idx = kms.idxmin()
     max_idx = kms.idxmax()
     plt.figure(figsize=(8,5))
     plt.scatter(kms, prices, color='green', label='Training data')
     plt.plot(kms, predicted, color='red', label='Regression line')
-    plt.scatter(kms[min_idx], prices[min_idx], color='blue', s=100, marker='o', label='Min mileage')
-    plt.scatter(kms[max_idx], prices[max_idx], color='purple', s=100, marker='x', label='Max mileage')
+    plt.scatter(kms[min_idx], prices[min_idx], color='blue', s=70, marker='x', label='Min mileage')
+    plt.scatter(kms[max_idx], prices[max_idx], color='purple', s=70, marker='x', label='Max mileage')
     plt.xlabel("Mileage (km)")
     plt.ylabel("Price (€)")
     plt.title("Linear Regression Fit with Min/Max Mileage Highlighted")
     plt.legend()
-    plt.grid(True, linestyle='--', alpha=0.1)
-    # plt.show()
-
-    plt.figure()
-    plt.hist(prices, bins=10, color='skyblue')
-    plt.xlabel("Price (€)")
-    plt.ylabel("Count")
-    plt.title("Distribution of Prices")
+    plt.grid(True, linestyle='-', alpha=0.5)
     plt.show()
 
 if __name__ == "__main__":

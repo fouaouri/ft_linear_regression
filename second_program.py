@@ -4,7 +4,7 @@ import json
 
 def trainingData(dataFrame):
     theta0, theta1 = 0, 0
-    learningRate, target, max_iteration = 0.0001, 0.001, 100000
+    learningRate, target, max_iteration = 0.1, 0.001, 10000
 
     kms = dataFrame['km'].values
     prices = dataFrame['price'].values
@@ -14,7 +14,6 @@ def trainingData(dataFrame):
     min_price, max_price = prices.min(), prices.max()
     kms_norm = (kms - min_km) / (max_km - min_km)
     prices_norm = (prices - min_price) / (max_price - min_price)
-
     for i in range(max_iteration):
         predicted = theta0 + theta1 * kms_norm
         error = predicted - prices_norm
@@ -28,9 +27,6 @@ def trainingData(dataFrame):
 
         theta0 -= tmp_theta0
         theta1 -= tmp_theta1
-
-    print(f"theta0: {theta0}, theta1: {theta1}")
-    print(f"min_km: {min_km}, max_km: {max_km}")
 
     with open('model_parameters.json', 'w') as f:
         json.dump({'theta0': float(theta0), 'theta1': float(theta1)}, f)
